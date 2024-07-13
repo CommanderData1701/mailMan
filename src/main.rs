@@ -1,9 +1,12 @@
-use log::{info, warn};
-use std::fs::File;
+use log::info;
+
+mod logging;
+use logging::initialize_logging;
 
 
 fn main() {
-    loop {
-        
-    }
+    initialize_logging().unwrap();
+
+
+    log::info!("Hello, world!");
 }
