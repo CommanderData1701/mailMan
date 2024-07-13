@@ -1,0 +1,11 @@
+[Unit]
+Description=mailMan is a simple headless IMAP client that filters your mailbox.
+After=network.target
+
+[Service]
+ExecStart=<BINARY_PATH>
+Restart=always
+Environment=RUST_LOG=info
+
+[Install]
+WantedBy=multi-user.target

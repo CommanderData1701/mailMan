@@ -5,8 +5,7 @@ use logging::initialize_logging;
 
 
 fn main() {
-    initialize_logging().unwrap();
+    initialize_logging();
 
-
-    log::info!("Hello, world!");
+    info!("Hello, world!");
 }

@@ -4,9 +4,10 @@ use log4rs::encode::pattern::PatternEncoder;
 use log4rs::config::{Appender, Config, Root};
 use std::env;
 
+
 const LOGFILE: &str = "/var/log/mailMan.log";
 
-pub fn initialize_logging() -> Result<(), E> {
+pub fn initialize_logging() {
     // Determine log output based on debug mode
     let mut builder = Config::builder();
     
@@ -20,7 +21,8 @@ pub fn initialize_logging() -> Result<(), E> {
         // Output to a file in release mode
         let logfile = FileAppender::builder()
             .encoder(Box::new(PatternEncoder::new("{l} - {m}\n")))
-            .build(LOGFILE)?;
+            .build(LOGFILE)
+            .unwrap();
 
         builder = builder.appender(
             Appender::builder()
@@ -33,10 +35,8 @@ pub fn initialize_logging() -> Result<(), E> {
         Root::builder()
             .appender(if cfg!(debug_assertions) { "stdout" } else { "logfile" })
             .build(LevelFilter::Info)
-    )?;
+    ).unwrap();
 
     // Initialize log4rs with the constructed configuration
-    log4rs::init_config(config)?;
-
-    Ok(())
+    log4rs::init_config(config).unwrap();
 }
