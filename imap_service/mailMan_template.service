@@ -7,6 +7,7 @@ ExecStart=/usr/local/bin/mailMan_imap_service
 Restart=on-failure
 Environment=RUST_LOG=info
 Environment=HOME=<HOME>
+Encironment=USER=<USER>
 User=<USER>
 WorkingDirectory=<HOME>/.mailMan
 
