@@ -9,12 +9,19 @@ then
 fi
 
 
+CURRENT_DIR=$(pwd)
+
+cd imap_service
 cargo build --release
 
 cp mailMan_template.service ./mailMan.service
-sed -i "s|<BINARY_PATH>|$(pwd)/target/release/mailMan|g" mailMan.service
+sed -i "s|<BINARY_PATH>|$CURRENT_DIR/target/release/mailMan|g" mailMan.service
 
 sudo mkdir /var/lib/mailMan
 
 sudo cp mailMan.service /etc/systemd/system/
+
+
+cd $CURRENT_DIR
+
 sudo systemctl daemon-reload
