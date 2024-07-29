@@ -1,11 +1,12 @@
 [Unit]
-Description=mailMan is a simple headless IMAP client that filters your mailbox.
+Description=mailMan is a simple headless IMAP client that filters your mailbox. It is implemented as systemd service, so that it can run without a user logged in.
 After=network.target
 
 [Service]
 ExecStart=<BINARY_PATH>
-Restart=always
+Restart=on-failure
 Environment=RUST_LOG=info
+WorkingDirectory=/var/lib/mailMan
 
 [Install]
 WantedBy=multi-user.target

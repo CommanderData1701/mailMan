@@ -14,5 +14,7 @@ cargo build --release
 cp mailMan_template.service ./mailMan.service
 sed -i "s|<BINARY_PATH>|$(pwd)/target/release/mailMan|g" mailMan.service
 
+sudo mkdir /var/lib/mailMan
+
 sudo cp mailMan.service /etc/systemd/system/
 sudo systemctl daemon-reload
