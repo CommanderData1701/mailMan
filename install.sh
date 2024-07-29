@@ -84,4 +84,11 @@ if ask_yes_no "Do you want to enable mailMan service? [y/N]: " "n"; then
     echo "DONE!"
 fi
 
+
+if ask_yes_no "Do you want to start mailMan service? [y/N]: " "n"; then
+    echo "Starting mailMan service..."
+    sudo systemctl start mailMan_$CURRENT_USER
+    echo "DONE!"
+fi
+
 echo "Installation finished."
