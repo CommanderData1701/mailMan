@@ -15,8 +15,9 @@ CURRENT_USER=$(whoami)
 CURRENT_HOME=$(echo ~)
 
 cd imap_service
-cargo build --release
 
+echo "Building and installing mailMan imap service..."
+cargo build --release
 cp mailMan_template.service ./mailMan.service
 sed -i "s|<HOME>|$CURRENT_HOME|g" mailMan.service
 sed -i "s|<USER>|$CURRENT_USER|g" mailMan.service
@@ -25,13 +26,18 @@ mkdir $CURRENT_HOME/.mailMan
 
 sudo cp target/release/mailMan_imap_service /usr/local/bin
 sudo cp mailMan_$CURRENT_USER.service /etc/systemd/system/
+echo "DONE!"
 
 
+echo "Building and installing mailMan cli..."
 cd ../cli
 cargo build --release
-sudo cp target/release/mailMan_cli /usr/local/bin
+sudo cp target/release/mailMan_cli /usr/local/bin/mailMan
+echo "DONE!"
 
 
 cd $CURRENT_DIR
 
+echo "Reloading systemd daemon..."
 sudo systemctl daemon-reload
+echo "DONE!"
