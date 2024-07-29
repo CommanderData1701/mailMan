@@ -57,7 +57,19 @@ cp mailMan_template.service ./mailMan.service
 sed -i "s|<HOME>|$CURRENT_HOME|g" mailMan.service
 sed -i "s|<USER>|$CURRENT_USER|g" mailMan.service
 
-mkdir $CURRENT_HOME/.mailMan
+
+# Create mailMan directories if they don't exist
+if [ ! -d "$CURRENT_HOME/.mailMan" ]; then
+    mkdir $CURRENT_HOME/.mailMan
+fi
+
+if [ ! -d "$CURRENT_HOME/.mailMan/keys" ]; then
+    mkdir $CURRENT_HOME/.mailMan/keys
+fi
+
+if [ ! -d "$CURRENT_HOME/.mailMan/logs"]; then
+    mkdir $CURRENT_HOME/.mailMan/logs
+fi
 
 sudo cp target/release/mailMan_imap_service /usr/local/bin
 sudo cp mailMan_$CURRENT_USER.service /etc/systemd/system/
