@@ -8,6 +8,41 @@ then
     exit 1
 fi
 
+ask_yes_no() {
+    local prompt="$1"
+    local default="$2"
+    local response
+
+    # Convert default to lowercase for consistency
+    default=${default,,}
+
+    while true; do
+        # Prompt user with a message
+        read -p "$prompt" response
+
+        # Convert response to lowercase
+        response=${response,,}
+
+        # Handle empty input (default case)
+        if [[ -z "$response" ]]; then
+            response="$default"
+        fi
+
+        # Check response and act accordingly
+        case "$response" in
+            y|yes)
+                return 0
+                ;;
+            n|no)
+                return 1
+                ;;
+            *)
+                echo "Please answer 'y' or 'n'."
+                ;;
+        esac
+    done
+}
+
 
 # Setting up some variables needed to create mailMan as instance for this user
 CURRENT_DIR=$(pwd)
@@ -41,3 +76,12 @@ cd $CURRENT_DIR
 echo "Reloading systemd daemon..."
 sudo systemctl daemon-reload
 echo "DONE!"
+
+
+if ask_yes_no "Do you want to enable mailMan service? [y/N]: " "n"; then
+    echo "Enabling mailMan service..."
+    sudo systemctl enable mailMan_$CURRENT_USER
+    echo "DONE!"
+fi
+
+echo "Installation finished."
