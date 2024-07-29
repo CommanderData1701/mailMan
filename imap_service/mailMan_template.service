@@ -6,7 +6,9 @@ After=network.target
 ExecStart=<BINARY_PATH>
 Restart=on-failure
 Environment=RUST_LOG=info
-WorkingDirectory=/var/lib/mailMan
+User=<USER>
+Environment=HOME=<HOME>
+WorkingDirectory=<HOME>
 
 [Install]
 WantedBy=multi-user.target
