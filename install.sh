@@ -17,13 +17,13 @@ cd imap_service
 cargo build --release
 
 cp mailMan_template.service ./mailMan.service
-sed -i "s|<BINARY_PATH>|$(pwd)/target/release/mailMan|g" mailMan.service
 sed -i "s|<HOME>|$CURRENT_HOME|g" mailMan.service
 sed -i "s|<USER>|$CURRENT_USER|g" mailMan.service
 
-sudo mkdir /var/lib/mailMan
+mkdir $CURRENT_HOME/.mailMan
 
-sudo cp mailMan_$(CURRENT_USER).service /etc/systemd/system/
+sudo cp target/release/mailMan_imap_service /usr/local/bin
+sudo cp mailMan_$CURRENT_USER.service /etc/systemd/system/
 
 
 cd $CURRENT_DIR

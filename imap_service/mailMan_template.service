@@ -3,12 +3,12 @@ Description=mailMan is a simple headless IMAP client that filters your mailbox. 
 After=network.target
 
 [Service]
-ExecStart=<BINARY_PATH>
+ExecStart=/usr/local/bin/mailMan_imap_service
 Restart=on-failure
 Environment=RUST_LOG=info
-User=<USER>
 Environment=HOME=<HOME>
-WorkingDirectory=<HOME>
+User=<USER>
+WorkingDirectory=<HOME>/.mailMan
 
 [Install]
 WantedBy=multi-user.target
