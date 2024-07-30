@@ -1,6 +1,8 @@
 use log::info;
 
 mod logging;
+mod mrule_parser;
+
 use logging::initialize_logging;
 
 
@@ -9,3 +11,7 @@ fn main() {
 
     info!("Hello, world!");
 }
+
+
+// #[cfg(test)]
+// mod tests;

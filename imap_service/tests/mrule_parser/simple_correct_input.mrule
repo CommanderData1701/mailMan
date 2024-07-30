@@ -1,0 +1,12 @@
+/*
+ * This is a file used for testing purposes.
+ */
+
+
+SERVER {
+    ADDRESS test-adress.com;
+    USER DouglasAdams;
+    PORT 42; // The answer for everything
+    ENCRYPTION STARTTLS;
+    PASSWORD password1;
+}
