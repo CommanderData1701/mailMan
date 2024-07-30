@@ -1,0 +1,25 @@
+/*
+ *  Example file for mrules file. In order to be loaded the SERVER has to be set.
+ */
+
+SERVER {
+    ADDRESS         imap.something.com;
+    USER            your.username@domain.com;   // Depends on your server
+    PORT            143;                        // Standard is 143
+    ENCRYPTION      STARTTLS;                   // Find a sane default here. Options: STARTLLS, SSL/TLS, NONE
+    PASSWORD        yourPassword;               // Should be done with encryption tool in CLI
+}
+
+
+RULE {
+    NAME            giveYourRuleAName;          // Can help when rules are not loaded
+    ACTION          DELETE;                     // Should incorporate MOVE and DELETE for first version
+    CONDITION       amazon IN SENDER;           // Should be able to chain the with OR, AND and brackets
+}
+
+
+RULE {
+    NAME            mailsFromMarkus;
+    ACTION          MOVETO /markus;
+    CONDITION       markus123@gmail.com EQUALS SENDER;
+}
