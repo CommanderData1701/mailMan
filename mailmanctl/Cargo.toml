@@ -1,0 +1,10 @@
+[package]
+name = "mailmanctl"
+version = "0.1.0"
+authors = ["Linus Henke"]
+about = "mailmanctl is the cli tool to interact with the mailman filtering service."
+edition = "2021"
+
+[dependencies]
+clap = { version = "4.5.21", features = ["derive"] }
+rpassword = "7.3.1"
