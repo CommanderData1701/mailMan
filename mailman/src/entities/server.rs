@@ -6,8 +6,20 @@ pub struct ImapServer {
 }
 
 impl ImapServer {
-    pub fn get_hostname(&self) -> String {
-        self.hostname
+    pub fn get_hostname(&self) -> &String {
+        &self.hostname
+    }
+
+    pub fn get_port(&self) -> u32 {
+        self.port
+    }
+
+    pub fn get_connection_security(&self) -> &ConnectionSecurity {
+        &self.connection_security
+    }
+
+    pub fn get_authentication_method(&self) -> &AuthenticationMethod {
+        &self.authentication_method
     }
 }
 
@@ -32,9 +44,9 @@ impl Default for ImapServerBuilder {
 impl ImapServerBuilder {
     pub fn build(&self) -> Result<ImapServer, String> {
         Ok (ImapServer {
-            hostname: match self.hostname {
+            hostname: match &self.hostname {
                 None => return Err("Hostname not set.".to_string()),
-                Some(hostname) => hostname
+                Some(hostname) => hostname.to_string()
             },
             authentication_method: self.authentication_method,
             connection_security: self.connection_security,
@@ -68,6 +80,7 @@ impl ImapServerBuilder {
     }
 }
 
+#[derive(Clone, Copy)]
 pub enum ConnectionSecurity {
     NoSecure,
     SSLTLSS
@@ -82,6 +95,7 @@ impl ConnectionSecurity {
     }
 }
 
+#[derive(Clone, Copy)]
 pub enum AuthenticationMethod {
     NormalPassword,
 }
