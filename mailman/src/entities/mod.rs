@@ -1,3 +1,3 @@
 mod server;
 
-pub use server::IMapServer;
+pub use server::ImapServer;
