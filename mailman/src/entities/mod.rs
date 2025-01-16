@@ -1,3 +1,6 @@
-mod server;
+mod imap_server;
 
-pub use server::ImapServer;
+pub use imap_server::{
+    ImapServer,
+    ConnectionSecurity
+};

@@ -1,4 +1,5 @@
 pub struct ImapServer {
+    display_name: String,
     hostname: String,
     port: u32,
     connection_security: ConnectionSecurity,
@@ -24,6 +25,7 @@ impl ImapServer {
 }
 
 pub struct ImapServerBuilder {
+    display_name: Option<String>,
     hostname: Option<String>,
     authentication_method: AuthenticationMethod,
     connection_security: ConnectionSecurity,
@@ -33,6 +35,7 @@ pub struct ImapServerBuilder {
 impl Default for ImapServerBuilder {
     fn default() -> Self {
         ImapServerBuilder{
+            display_name: None,
             hostname: None,
             authentication_method: AuthenticationMethod::NormalPassword,
             connection_security: ConnectionSecurity::NoSecure,
@@ -44,6 +47,10 @@ impl Default for ImapServerBuilder {
 impl ImapServerBuilder {
     pub fn build(&self) -> Result<ImapServer, String> {
         Ok (ImapServer {
+            display_name: match &self.hostname {
+                None => return Err("Displayname not set.".to_string()),
+                Some(dis_name) => dis_name.to_string()
+            },
             hostname: match &self.hostname {
                 None => return Err("Hostname not set.".to_string()),
                 Some(hostname) => hostname.to_string()
@@ -87,7 +94,7 @@ pub enum ConnectionSecurity {
 }
 
 impl ConnectionSecurity {
-    fn get_default_port(&self) -> u32 {
+    pub fn get_default_port(&self) -> u32 {
         match &self {
             Self::NoSecure => 143,
             Self::SSLTLSS => 993,
