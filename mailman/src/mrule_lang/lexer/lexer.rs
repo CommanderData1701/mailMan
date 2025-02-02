@@ -54,4 +54,46 @@ pub enum Lexemes {
     AttributeIs,
     #[token("isEmpty")]
     AttributeIsEmpty,
+
+    // Email attributes
+    #[token("subject")]
+    Subject,  
+    #[token("sender")]
+    Sender,  
+    #[token("recipient")]
+    Recipient,  
+    #[token("cc")]
+    Cc,  
+    #[token("bcc")]
+    Bcc,  
+    #[token("sent_date")]
+    SentDate,  
+    #[token("received_date")]
+    ReceivedDate,  
+    #[token("message_id")]
+    MessageId,  
+    #[token("body")]
+    Body,  
+    #[token("attachments")]
+    Attachments,  
+    #[token("is_read")]
+    IsRead,  
+    #[token("flags")]
+    Flags,  
+    #[token("priority")]
+    Priority,  
+    #[token("folder")]
+    Folder,  
+    #[token("size")]
+    Size,  
+
+    // Attachment sub-attributes  
+    #[token("filename")]
+    Filename,  
+    #[token("content_type")]
+    ContentType,  
+    #[token("attachment_size")]
+    AttachmentSize,  
+    #[token("content")]
+    Content,
 }
